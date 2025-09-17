@@ -22,8 +22,8 @@ const GenericNode: React.FC<GenericNodeProps> = ({
     <div
       style={{
         padding: 10,
-        border: `2px solid ${borderColor}`,
-        borderRadius: 8,
+        border: `1px solid ${borderColor}`,
+        borderRadius: 20,
         background: backgroundColor,
         minWidth: 150,
         display: 'flex',
@@ -37,7 +37,6 @@ const GenericNode: React.FC<GenericNodeProps> = ({
         <div style={{ fontSize: 12 }}>{label}</div>
       </div>
 
-      {/* Output handle */}
       <Handle
         type="source"
         position={Position.Right}

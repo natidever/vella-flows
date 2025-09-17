@@ -3,27 +3,27 @@
 import { useState, useCallback } from 'react';
 import { ReactFlow, Background, Controls, applyNodeChanges, applyEdgeChanges, addEdge, Handle, Position } from '@xyflow/react';
 import '@xyflow/react/dist/style.css';
-
+import SendMessage from './nodes/sendmessages';
 // Initial nodes
 const initialNodes = [
   {
     id: 'n1',
-    type: 'emailListener',
+    type: 'sendMessage',
     position: { x: 50, y: 50 },
     data: { label: 'Listen to Incoming Emails' },
   },
-  {
-    id: 'n2',
-    type: 'extractBody',
-    position: { x: 300, y: 50 },
-    data: { label: 'Extract Email Body' },
-  },
-  {
-    id: 'n3',
-    type: 'send',
-    position: { x: 550, y: 50 },
-    data: { label: 'Send to API' },
-  },
+  // {
+  //   id: 'n2',
+  //   type: 'extractBody',
+  //   position: { x: 300, y: 50 },
+  //   data: { label: 'Extract Email Body' },
+  // },
+  // {
+  //   id: 'n3',
+  //   type: 'send',
+  //   position: { x: 550, y: 50 },
+  //   data: { label: 'Send to API' },
+  // },
 ];
 
 // Initial edges
@@ -46,31 +46,36 @@ export default function App() {
     (params) => setEdges((es) => addEdge(params, es)),
     []
   );
+    const emailNodeData = { label: 'Incoming Emails' };
+
 
 
   const nodeTypes = {
-    emailListener: ({ data }) => (
-      <div style={{ padding: 10, border: '2px solid #1a73e8', borderRadius: 8, background: '#e8f0fe' }}>
-        <strong>Email Listener</strong>
-        <div style={{ fontSize: 12 }}>{data.label}</div>
-        <Handle type="source" position={Position.Right} id="out" style={{ background: '#1a73e8' }} />
-      </div>
-    ),
-    extractBody: ({ data }) => (
-      <div style={{ padding: 10, border: '2px solid #fbbc05', borderRadius: 8, background: '#fff7e6' }}>
-        <Handle type="target" position={Position.Left} id="in" style={{ background: '#fbbc05' }} />
-        <strong>Extract Body</strong>
-        <div style={{ fontSize: 12 }}>{data.label}</div>
-        <Handle type="source" position={Position.Right} id="out" style={{ background: '#fbbc05' }} />
-      </div>
-    ),
-    send: ({ data }) => (
-      <div style={{ padding: 10, border: '2px solid #34a853', borderRadius: 8, background: '#e6f4ea' }}>
-        <Handle type="target" position={Position.Left} id="in" style={{ background: '#34a853' }} />
-        <strong>Send Node</strong>
-        <div style={{ fontSize: 12 }}>{data.label}</div>
-      </div>
-    ),
+    // emailListener: ({ data }) => (
+    //   <div style={{ padding: 10, border: '2px solid #1a73e8', borderRadius: 8, background: '#e8f0fe' }}>
+    //     <strong>Email Listener</strong>
+    //     <div style={{ fontSize: 12 }}>{data.label}</div>
+    //     <Handle type="source" position={Position.Right} id="out" style={{ background: '#1a73e8' }} />
+    //   </div>
+    // ),
+    // extractBody: ({ data }) => (
+    //   <div style={{ padding: 10, border: '2px solid #fbbc05', borderRadius: 8, background: '#fff7e6' }}>
+    //     <Handle type="target" position={Position.Left} id="in" style={{ background: '#fbbc05' }} />
+    //     <strong>Extract Body</strong>
+    //     <div style={{ fontSize: 12 }}>{data.label}</div>
+    //     <Handle type="source" position={Position.Right} id="out" style={{ background: '#fbbc05' }} />
+    //   </div>
+    // ),
+    // send: ({ data }) => (
+    //   <div style={{ padding: 10, border: '2px solid #34a853', borderRadius: 8, background: '#e6f4ea' }}>
+    //     <Handle type="target" position={Position.Left} id="in" style={{ background: '#34a853' }} />
+    //     <strong>Send Node</strong>
+    //     <div style={{ fontSize: 12 }}>{data.label}</div>
+    //   </div>
+    // ),
+
+    sendMessage: SendMessage
+
 
   
   };
@@ -107,8 +112,10 @@ const workflow = {
 
 
   return (
+    
     <div style={{ height: '100vh', width: '100vw' }}>
   <button  type="button" onClick={saveWorkflow} style={{position: 'absolute', bottom:10, right: 50,color:'black',background:'grey',zIndex:10}}>Save Workflow</button>
+    {/* <SendMessage /> */}
 
       <ReactFlow
         nodes={nodes}
